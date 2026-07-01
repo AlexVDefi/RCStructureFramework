@@ -2,7 +2,7 @@
 
 This takes you from an empty mod to a working "build a structure" feature on top of RC
 Structure Framework - in about five minutes. A complete, compilable version lives in
-[`examples/RCSFExampleShed`](https://github.com/AlexVDefi/Structure-Framework/tree/main/examples/RCSFExampleShed),
+[`examples/RCSFExampleShed`](https://github.com/AlexVDefi/RCStructureFramework/tree/main/examples/RCSFExampleShed),
 and the [Build a shed tutorial](tutorials/build-a-shed.md) walks through it in depth.
 
 ## Prerequisites
