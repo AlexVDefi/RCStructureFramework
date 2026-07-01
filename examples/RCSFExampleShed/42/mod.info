@@ -1,0 +1,5 @@
+name=RCSF Example Shed
+id=RCSFExampleShed
+description=Minimal example consumer of RC Structure Framework: build a small wooden shed from inventory planks. See the example README. Requires RCStructureFramework.
+modversion=1.0.0
+require=RCStructureFramework

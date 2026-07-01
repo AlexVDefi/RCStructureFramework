@@ -1,0 +1,12 @@
+{
+    "Tooltip_RCStructureFramework_InvalidSize": "This structure size is not valid.",
+    "Tooltip_RCStructureFramework_IncompletePerimeter": "The structure perimeter is incomplete.",
+    "Tooltip_RCStructureFramework_InvalidPlacement": "This structure cannot be placed here.",
+    "Tooltip_RCStructureFramework_BuildLevelDown": "Lower the build Z level.",
+    "Tooltip_RCStructureFramework_BuildLevelUp": "Raise the build Z level.",
+    "Tooltip_RCStructureFramework_EditLevelDown": "Lower the active edit Z (paint layer).",
+    "Tooltip_RCStructureFramework_EditLevelUp": "Raise the active edit Z (paint layer).",
+    "Tooltip_RCStructureFramework_Materials": "Materials: %1",
+    "Tooltip_RCStructureFramework_EditFootprint": "Go back to footprint editing. Painted walls and floors are kept where the new footprint still covers them; the rest is removed on Accept.",
+    "Tooltip_RCStructureFramework_Pipette": "Middle-click a placed piece to make it the active piece. Click again to cycle through stacked pieces."
+}

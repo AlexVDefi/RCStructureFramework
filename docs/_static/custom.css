@@ -1,0 +1,139 @@
+/* ============================================================================
+   RC Structure Framework docs - neutral monochrome theme.
+
+   Goals: text in white / shades of grey only; hierarchy and emphasis carried by
+   weight and subtly-elevated grey surfaces with hairline borders - no loud
+   colour, no glows, no pure black. Links use the conventional blue (visited:
+   purple) so they read instantly as links.
+
+   NOTE: Furo declares its custom properties on `body` (not :root), so overrides
+   must target `body` (and the dark variants) or they get shadowed.
+   ============================================================================ */
+
+/* ---- Light theme tokens ---- */
+body {
+    --rcsf-link: #2563eb;                  /* standard link blue */
+    --rcsf-visited: #7c3aed;               /* standard visited purple */
+    --rcsf-surface: #f4f5f7;               /* slightly elevated grey panel */
+    --rcsf-surface-strong: #eceef1;
+    --rcsf-hairline: rgba(0, 0, 0, 0.08);
+    --rcsf-signame: #111827;               /* near-black, strong */
+
+    --color-brand-primary: #2563eb;
+    --color-brand-content: var(--rcsf-link);
+    --color-api-background: var(--rcsf-surface);
+    --color-api-background-hover: var(--rcsf-surface-strong);
+    --color-code-background: #f6f7f9;
+    --color-inline-code-background: var(--rcsf-surface-strong);
+}
+
+/* ---- Dark theme tokens (explicit toggle + system preference) ---- */
+body[data-theme="dark"] {
+    --rcsf-link: #6aa9ff;                  /* standard link blue, lifted for dark */
+    --rcsf-visited: #c084fc;               /* standard visited purple, lifted for dark */
+    --rcsf-surface: #1c1f24;               /* one step lighter than the page */
+    --rcsf-surface-strong: #24282e;
+    --rcsf-hairline: rgba(255, 255, 255, 0.08);
+    --rcsf-signame: #eef1f4;               /* near-white, strong */
+
+    --color-brand-primary: #6aa9ff;
+    --color-brand-content: var(--rcsf-link);
+    --color-api-background: var(--rcsf-surface);
+    --color-api-background-hover: var(--rcsf-surface-strong);
+    --color-code-background: var(--rcsf-surface);
+    --color-inline-code-background: var(--rcsf-surface-strong);
+}
+
+@media (prefers-color-scheme: dark) {
+    body:not([data-theme="light"]) {
+        --rcsf-link: #6aa9ff;
+        --rcsf-visited: #c084fc;
+        --rcsf-surface: #1c1f24;
+        --rcsf-surface-strong: #24282e;
+        --rcsf-hairline: rgba(255, 255, 255, 0.08);
+        --rcsf-signame: #eef1f4;
+
+        --color-brand-primary: #6aa9ff;
+        --color-brand-content: var(--rcsf-link);
+        --color-api-background: var(--rcsf-surface);
+        --color-api-background-hover: var(--rcsf-surface-strong);
+        --color-code-background: var(--rcsf-surface);
+        --color-inline-code-background: var(--rcsf-surface-strong);
+    }
+}
+
+/* ---- Links: conventional blue (set via --color-brand-content), visited purple.
+   Scoped to article content so sidebar/nav links keep the brand colour. */
+article a:visited {
+    color: var(--rcsf-visited);
+}
+
+/* ---- API signatures: neutral name on an elevated panel with a hairline ----
+   Furo defaults .sig-name to --color-problematic (red). Recolour it to a strong
+   neutral, and give the signature block clear separation from the body. */
+.sig-name { color: var(--rcsf-signame); }
+.sig-prename { color: var(--color-foreground-secondary); }
+.sig-paren { color: var(--color-foreground-secondary); }
+
+.sig:not(.sig-inline) {
+    border: 1px solid var(--rcsf-hairline);
+    border-radius: 0.4rem;
+}
+
+/* ---- Code blocks + inline code: elevated grey surface with a hairline ----
+   The Pygments style paints its own background on .highlight (e.g. monokai's
+   warm #272822). Override with explicit hex matching Furo's own theme selectors
+   - no CSS variable to fail to resolve, !important to beat the Pygments rule. */
+.highlight,
+.highlight pre {
+    background: #f6f7f9 !important;          /* light theme */
+}
+body[data-theme="dark"] .highlight,
+body[data-theme="dark"] .highlight pre {
+    background: #1c1f24 !important;          /* dark theme (explicit toggle) */
+}
+@media (prefers-color-scheme: dark) {
+    body:not([data-theme="light"]) .highlight,
+    body:not([data-theme="light"]) .highlight pre {
+        background: #1c1f24 !important;      /* dark theme (auto + system dark) */
+    }
+}
+.highlight {
+    border: 1px solid var(--rcsf-hairline);
+    border-radius: 0.4rem;
+}
+.sig-inline,
+code.literal {
+    border: 1px solid var(--rcsf-hairline);
+    font-size: 0.875em;
+}
+
+/* ---- Monochrome syntax highlighting -----------------------------------------
+   Differentiate by weight and dimming, not hue, so code reads as shades of grey
+   rather than a rainbow. !important overrides Furo's higher-specificity,
+   theme-scoped Pygments rules. --color-code-foreground is theme-aware. */
+.highlight .c, .highlight .ch, .highlight .cm, .highlight .c1, .highlight .cs,
+.highlight .cp, .highlight .cpf {
+    color: var(--color-foreground-secondary) !important;
+    font-style: italic;
+}
+.highlight .k, .highlight .kc, .highlight .kd, .highlight .kn, .highlight .kp,
+.highlight .kr, .highlight .kt, .highlight .ow {
+    color: var(--color-foreground-primary) !important;
+    font-weight: 600;
+}
+.highlight .s, .highlight .sa, .highlight .sb, .highlight .sc, .highlight .dl,
+.highlight .sd, .highlight .s2, .highlight .se, .highlight .sh, .highlight .si,
+.highlight .sx, .highlight .sr, .highlight .s1, .highlight .ss,
+.highlight .n, .highlight .na, .highlight .nb, .highlight .bp, .highlight .nc,
+.highlight .nd, .highlight .ni, .highlight .ne, .highlight .nf, .highlight .fm,
+.highlight .nl, .highlight .nn, .highlight .nx, .highlight .py, .highlight .nt,
+.highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi,
+.highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi,
+.highlight .mo, .highlight .il, .highlight .o, .highlight .p {
+    color: var(--color-code-foreground, var(--color-foreground-primary)) !important;
+}
+
+/* ---- Landing-page cards ---- */
+.sd-card { border-radius: 10px; }
+.sd-card-title { font-weight: 600; }
