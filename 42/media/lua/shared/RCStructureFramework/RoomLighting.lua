@@ -97,7 +97,6 @@ local function cleanupRoomLights(isoRoom)
     if roomLights then
         for i = 0, roomLights:size() - 1 do
             local roomLight = roomLights:get(i)
-            roomLight.active = false
             if worldRoomLights then
                 worldRoomLights:remove(roomLight)
             end
@@ -246,6 +245,7 @@ local registered = false
 ---@return nil
 function RoomLighting.registerEvents()
     if registered then return end
+    if isServer() and not isClient() then return end
     registered = true
     Events.OnObjectAdded.Add(onObjectAdded)
     Events.OnObjectAboutToBeRemoved.Add(onObjectAboutToBeRemoved)
